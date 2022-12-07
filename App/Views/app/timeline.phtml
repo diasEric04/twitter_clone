@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg menu">
+	<div class="container">
+	  <div class="navbar-nav">
+	  	<a class="menuItem" href="/timeline">
+	  		Home
+	  	</a>
+
+	  	<a class="menuItem" href="/sair">
+	  		Sair
+	  	</a>
+			<img src="/img/twitter_logo.png" class="menuIco" />
+	  </div>
+	</div>
+</nav>
+
+<div class="container mt-5">
+	<div class="row pt-2">
+		
+		<?php require_once 'msg/msg_dados_perfil.php' ?>
+
+		<div class="col-md-6">
+			<div class="row mb-2">
+				<div class="col tweetBox">
+					<form method='post' action='/tweet'>
+						<textarea maxlength='140' name='tweet' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						
+						<div class="col mt-2 d-flex justify-content-end">
+							<button type="submit" class="btn btn-primary">Tweet</button>
+						</div>
+					<?php if( isset($_GET['status']) && $_GET['status'] === 'erro' ) { ?>
+						<small class='text-danger'>Erro ao tweetar</small>
+					<?php } ?>
+					</form>	
+				</div>
+			</div>
+
+			
+		<?php foreach($this->view->tweets as $tweet) { ?>
+			<div class="row tweet">
+				<div class="col">
+					<p><?php if ($tweet['nome_usuario'] === $this->view->dados_usuarios['nome']) {echo '<strong>'. $tweet['nome_usuario'] .'</strong>';} else echo $tweet['nome_usuario']; ?> <small><span class="text text-muted">- <?php require 'msg/msg_tempo.php'   ?></span></small></p>
+					<p><?=$tweet['tweet'] ?></p>
+
+					<br />
+					<form method='post' action='/remover_tweet'>
+						<div class="col d-flex justify-content-end">
+							<?php if ($this->view->dados_usuarios['nome'] === $tweet['nome_usuario']) { ?>
+								<button type="submit" class="btn btn-danger"><small>Remover</small></button>
+								<input type="hidden" name='id_tweet' value='<?=$tweet['id']?>'>
+							<?php } ?>
+						</div>
+					</form>
+				</div>
+			</div>
+		<?php } ?>
+
+
+		</div>
+
+
+		<div class="col-md-3">
+			<div class="quemSeguir">
+				<span class="quemSeguirTitulo">Quem seguir</span><br />
+				<hr />
+				<a href="/quem_seguir" class="quemSeguirTxt">Procurar por pessoas conhecidas</a>
+			</div>
+		</div>
+
+	</div>
+</div>

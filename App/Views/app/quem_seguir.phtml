@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg menu">
+	<div class="container">
+	  <div class="navbar-nav">
+	  	<a class="menuItem" href="/timeline">
+	  		Home
+	  	</a>
+
+	  	<a class="menuItem" href="/sair">
+	  		Sair
+	  	</a>
+			<img src="/img/twitter_logo.png" class="menuIco" />
+	  </div>
+	</div>
+</nav>
+
+<div class="container mt-5">
+	<div class="row pt-2">
+		
+		<?php require_once 'msg/msg_dados_perfil.php' ?>
+
+		<div class="col-md-6">
+			
+			<div class="row mb-2">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+								<div class="input-group mb-3">
+									<input autocomplete='off' id='input' name='user_procurado' value='<?php echo isset($this->view->nome_procurado) ? $this->view->nome_procurado : '' ?>' type="text" class="form-control" placeholder="Quem você está procurando?">
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+				<div id='content'>
+				</div>	
+				
+
+		</div>
+	</div>
+</div>
+<script src='js/content.js'></script>
+
